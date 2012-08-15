@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="http://127.0.0.1:8001/socket.io/socket.io.js"></script>
+<script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+<input type="text" id="demo" >
+<div style="width:40px;height:40px;border:1px solid #000;" id="send">发送</div>
+<div style="width:100px;height:auto;color:red" id='get'><div>
+<script>
+                                            var socket = io.connect('http://127.0.0.1:8001')
+                                            $('#send').click(function(){
+                                                var demo = $('#demo').val();       
+                                                socket.emit('send', {my: demo});
+                                                    
+                                            });
+                                            socket.on('all', function(d){
+                                                $('#get').append(d.data+'<br>');
+                                            });
+</script>
+</body>
+</html>
