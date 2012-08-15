@@ -8,6 +8,7 @@
 <div style="width:40px;height:40px;border:1px solid #000;" id="send">发送</div>
 <div style="width:100px;height:auto;color:red" id='get'><div>
 <script>
+(function(){
     var socket = io.connect('http://127.0.0.1:8001')
     $('#send').click(function(){
         var demo = $('#demo').val();       
@@ -17,6 +18,13 @@
     socket.on('all', function(d){
         $('#get').append(d.name+':'+d.data+'<br>');
     });
+    socket.on('connected', function(d){
+        $('#get').append(d.name+':'+d.data+'<br>');
+    });
+    socket.on('disconnected', function(d){
+        $('#get').append(d.data+' 离开');    
+    });
+})();
 </script>
 </body>
 </html>
